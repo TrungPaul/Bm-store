@@ -36,3 +36,12 @@ Route::get('/change-password', function () {
 Route::get('/login', function () {
     return view('auth.login');
 });
+//Paypal
+
+Route::post('/create-payment', '\App\Http\Controllers\PaymentController@create')
+    ->name('create-payment');
+Route::get('/execute-payment', '\App\Http\Controllers\PaymentController@execute')
+    ->name('execute-payment');
+Route::get('cancel', function () {
+    return "Cancel";
+})->name('cancel-payment');
