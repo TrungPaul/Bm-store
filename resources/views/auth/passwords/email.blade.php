@@ -6,10 +6,19 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">Reset password</div>
-
+                @if (session('status'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status') }}
+                    </div>
+                @endif
+                @if (session('email'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('email') }}
+                    </div>
+                @endif
                 <div class="card-body">
-        
-                    <form method="POST">
+
+                    <form action="{{ route('forgot.password.store') }}" method="POST">
                         @csrf
                         <div class="form-group row">
                             <label for="email" class="col-md-2 col-form-label text-md-right">Email</label>
