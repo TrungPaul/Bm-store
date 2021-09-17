@@ -81,7 +81,17 @@
     <script src="{{ asset('assets/js/lodash.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/js/jquery.loading.min.js') }}" type="text/javascript"></script>
     <!--end::Global Theme Bundle -->
-
+    <script src="{{ asset('assets/js/toastr.min.js') }}" type="text/javascript"></script>
+    <!--end::Global Theme Bundle -->
+    <script type="module">
+        @if (Session::get('success'))
+        toastr.success("{{ Session::get('success') }}");
+        @elseif(Session::get('warning'))
+        toastr.warning("{{ Session::get('warning') }}");
+        @elseif(Session::get('error'))
+        toastr.error("{{ Session::get('error') }}");
+        @endif
+    </script>
     @yield('scripts')
     @stack('multiple_scripts')
 </body>

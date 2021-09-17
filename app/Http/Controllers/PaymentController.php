@@ -100,4 +100,17 @@ class PaymentController extends Controller
 
         return $payment->execute($execution, $apiContext);
     }
+
+    public function listEvent()
+    {
+        $apiContext = new \PayPal\Rest\ApiContext(
+            new \PayPal\Auth\OAuthTokenCredential(
+                config('services.paypal.id'),
+                config('services.paypal.secret')
+            )
+        );
+
+        $output = \PayPal\Api\WebhookEventType::availableEventTypes($apiContext);
+        return $output;
+    }
 }
