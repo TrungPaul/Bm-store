@@ -5,6 +5,8 @@
         <div class="row">
             <div class="col-lg-12">
                 <!--begin::Portlet-->
+                <form action="{{ route('auth.password.store') }}" method="post">
+                    @csrf
                 <div class="kt-portlet">
                     <!--begin::Portlet-->
                     <div class="kt-portlet kt-portlet--last kt-portlet--head-lg kt-portlet--responsive-mobile"
@@ -28,6 +30,7 @@
                     </div>
                     <div class="kt-portlet__body">
                         <!--begin::Form-->
+
                         <div class="form-group row">
                             <div class="col-md-6 offset-3">
                                 <div class="form-group">
@@ -48,8 +51,10 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
                     </div>
+                </form>
             </div>
         </div>
         <!--end::Portlet-->
