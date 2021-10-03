@@ -19,6 +19,7 @@ Route::get('/', function () {
 Route::get('/login', 'App\Http\Controllers\Auth\AuthController@login')->name('login');
 Route::post('/login', 'App\Http\Controllers\Auth\AuthController@storeLogin')->name('login.store');
 Route::get('/register', 'App\Http\Controllers\Auth\AuthController@storeRegister');
+Route::get('/test', 'App\Http\Controllers\CategoryController@index');
 
 Route::group([
     'middleware' => 'auth',
