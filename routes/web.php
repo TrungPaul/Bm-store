@@ -26,7 +26,7 @@ Route::group([
     'namespace' => 'App\Http\Controllers',
     'prefix' => 'admin'
 ], function () {
-    Route::get('/admin', function () {
+    Route::get('/', function () {
         return view('admin.index');
     })->name('admin');
     Route::get('/change-password', function () {
@@ -38,6 +38,7 @@ Route::group([
     })->name('profile.edit');
 
     Route::resource('/category', 'CategoryController');
+    Route::resource('/user', 'UserController');
 
 
     Route::get('/logout', 'Auth\AuthController@logout')->name('logout');

@@ -40,7 +40,9 @@ class AuthController extends Controller
             User::create([
                 'name' => 'dungvn',
                 'email' => 'dungvn.dev@gmail.com',
+                'phone' => '1234567890',
                 'password' => Hash::make('123456'),
+                'status' => 1
             ]);
             DB::commit();
 
@@ -48,7 +50,7 @@ class AuthController extends Controller
         } catch (\Exception $exception) {
             DB::rollBack();
 
-            return redirect()->back()->with('error', 'Some thing wrong!');
+            return redirect()->back()->with('error', $exception->getMessage());
         }
     }
 
