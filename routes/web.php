@@ -23,7 +23,8 @@ Route::get('/test', 'App\Http\Controllers\CategoryController@index');
 
 Route::group([
     'middleware' => 'auth',
-    'namespace' => 'App\Http\Controllers'
+    'namespace' => 'App\Http\Controllers',
+    'prefix' => 'admin'
 ], function () {
     Route::get('/admin', function () {
         return view('admin.index');
@@ -35,6 +36,8 @@ Route::group([
     Route::get('/profile', function () {
         return view('auth.profile');
     })->name('profile.edit');
+
+    Route::resource('/category', 'CategoryController');
 
 
     Route::get('/logout', 'Auth\AuthController@logout')->name('logout');

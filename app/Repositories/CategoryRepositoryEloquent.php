@@ -2,6 +2,8 @@
 
 namespace App\Repositories;
 
+use App\ModelFilters\CategoryFilter;
+use Illuminate\Container\Container as Application;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Models\Category;
 
@@ -12,6 +14,12 @@ use App\Models\Category;
  */
 class CategoryRepositoryEloquent extends BaseRepositoryEloquent implements CategoryRepository
 {
+    public function __construct(Application $app)
+    {
+        parent::__construct($app);
+        $this->setModelFilter(CategoryFilter::class);
+    }
+
     /**
      * Specify Model class name
      *
