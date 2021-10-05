@@ -59,7 +59,7 @@
                                     </table>
                                 </div>
                                 <div class="pull-right">
-                                    {!! $categories->appends(Request::except('page'))->render() !!}
+                                    {!! $categories->appends(Request::except('page'))->links('components.pagination') !!}
                                 </div>
                             </div>
                         </div>
