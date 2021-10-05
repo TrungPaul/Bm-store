@@ -23,10 +23,10 @@ class CategoryService extends BaseService
         return $attribute;
     }
 
-    public function update(array $attributes, int $id)
-    {
-        return $this->repository->update($attributes, $id);
-    }
+//    public function update(array $attributes, int $id)
+//    {
+//        return $this->repository->update($attributes, $id);
+//    }
 
     public function functionInService()
     {

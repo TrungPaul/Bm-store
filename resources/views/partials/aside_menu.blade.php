@@ -109,14 +109,14 @@
                 <div class="kt-menu__submenu">
                     <ul class="kt-menu__subnav">
                         <li class="kt-menu__item kt-menu__item--active">
-                            <a href="" class="kt-menu__link ">
+                            <a href="{{ route('category.index') }}" class="kt-menu__link ">
                                 <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i>
                                 <span class="kt-menu__link-text">List</span>
                             </a>
                         </li>
 
                         <li class="kt-menu__item kt-menu__item--active">
-                            <a href="" class="kt-menu__link ">
+                            <a href="{{ route('category.create') }}" class="kt-menu__link ">
                                 <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i>
                                 <span class="kt-menu__link-text">Add new</span>
                             </a>
