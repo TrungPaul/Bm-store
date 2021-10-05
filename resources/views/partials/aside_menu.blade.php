@@ -59,20 +59,20 @@
                 data-ktmenu-submenu-toggle="hover">
                 <a href="" class="kt-menu__link kt-menu__toggle">
                     <i class="kt-menu__link-icon flaticon2-avatar"></i>
-                    <span class="kt-menu__link-text">Group</span>
+                    <span class="kt-menu__link-text">Users</span>
                     <i class="kt-menu__ver-arrow la la-angle-right"></i>
                 </a>
                 <div class="kt-menu__submenu">
                     <ul class="kt-menu__subnav">
                         <li class="kt-menu__item kt-menu__item--active">
-                            <a href="" class="kt-menu__link ">
+                            <a href="{{ route('user.index') }}" class="kt-menu__link ">
                                 <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i>
                                 <span class="kt-menu__link-text">List</span>
                             </a>
                         </li>
 
                         <li class="kt-menu__item kt-menu__item--active">
-                            <a href="" class="kt-menu__link ">
+                            <a href="{{ route('user.create') }}" class="kt-menu__link ">
                                 <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i>
                                 <span class="kt-menu__link-text">Add new</span>
                             </a>

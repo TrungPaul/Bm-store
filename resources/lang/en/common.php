@@ -58,16 +58,19 @@ return [
     'save_password' => 'Save password',
     'forgot_password' => 'Forgot password',
     'reset_password' => 'Reset password',
+    'change_password' => 'Change password',
     'send' => 'Send',
     'logo' => 'Logo',
     'image' => 'Image',
     'yes' => 'Yes',
     'no' => 'No',
+    'balance' => 'Balance',
     'created_success' => 'Created successfully',
     'updated_success' => 'Updated successfully',
     'error' => 'Some thing wrong!',
     'price' => 'Price',
     'page' => [
-        'category' => 'Category'
+        'category' => 'Category',
+        'user' => 'Users'
     ],
 ];
