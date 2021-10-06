@@ -59,6 +59,10 @@ class UserController extends Controller
 
     public function update(Request $request, int $id)
     {
+        $request->validate([
+            'password' => 'required',
+        ]);
+
         try {
             DB::beginTransaction();
             $this->userService->update(
@@ -66,19 +70,16 @@ class UserController extends Controller
             );
             DB::commit();
 
-            if (isset($request->type))
-            {
+            if (isset($request->type)) {
                 return response()->json([
                     'code' => 200,
                     'message' => @trans('common.updated_success')
                 ]);
             }
             return redirect()->route('category.index')->with('success', @trans('common.updated_success'));
-        } catch (\Exception $exception)
-        {
+        } catch (\Exception $exception) {
             DB::rollBack();
-            if (isset($request->type))
-            {
+            if (isset($request->type)) {
                 return response()->json([
                     'code' => 400,
                     'message' => $exception->getMessage()

@@ -10,7 +10,7 @@ use Prettus\Repository\Eloquent\BaseRepository as L5BaseRepository;
  */
 abstract class BaseRepositoryEloquent extends L5BaseRepository
 {
-    const PER_PAGE = 20;
+    const PER_PAGE = 5;
 
     private $modelFilter;
 

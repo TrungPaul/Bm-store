@@ -9,11 +9,6 @@
             <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" style="background-image: url({{ asset('assets/media/bg/bg-3.jpg') }});">
                 <div class="kt-grid__item kt-grid__item--fluid kt-login__wrapper">
                     <div class="kt-login__container">
-                        <div class="kt-login__logo">
-                            <a href="/">
-                                <img src="{{ asset('assets/media/logos/logo-light.png') }}">
-                            </a>
-                        </div>
                         @yield('content')
                     </div>
                 </div>

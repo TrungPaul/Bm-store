@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
 use App\Rules\CurrentPasswordCorrectRule;
+use App\Services\UserService;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,6 +18,16 @@ use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
+    /**
+     * @var UserService
+     */
+    private $userService;
+
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
+
     public function login() {
         return view('auth.login');
     }
@@ -30,27 +42,23 @@ class AuthController extends Controller
     }
 
     public function register() {
-        return "view register";
+        return view('auth.register');
     }
 
-    public function storeRegister()
+    public function storeRegister(RegisterRequest $request)
     {
         DB::beginTransaction();
         try {
-            User::create([
-                'name' => 'dungvn',
-                'email' => 'dungvn.dev@gmail.com',
-                'phone' => '1234567890',
-                'password' => Hash::make('123456'),
-                'status' => 1
-            ]);
+            $this->userService->create(
+                $this->userService->preparingCreateOrUpdate($request->validated())
+            );
             DB::commit();
 
             return redirect()->route('login')->with('success', 'Successfully');
         } catch (\Exception $exception) {
             DB::rollBack();
 
-            return redirect()->back()->with('error', $exception->getMessage());
+            return redirect()->back()->withInput()->with('error', $exception->getMessage());
         }
     }
 
