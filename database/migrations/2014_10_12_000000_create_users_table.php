@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->tinyInteger('type')->default(2)
                 ->comment('1 => admin, 2 => user');
-            $table->tinyInteger('status')->default(2)
+            $table->tinyInteger('status')->default(1)
                 ->comment('1 => active, 2 => inactive');
             $table->rememberToken();
             $table->timestamps();

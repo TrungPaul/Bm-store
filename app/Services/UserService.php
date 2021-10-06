@@ -16,9 +16,11 @@ class UserService extends BaseService
 
     public function preparingCreateOrUpdate(array $attribute)
     {
-        if (isset($attribute['type'])  == "CHANGE_PASS")
-        {
+        if (isset($attribute['type'])  == "CHANGE_PASS") {
             unset($attribute['type']);
+        }
+
+        if (isset($attribute['password'])) {
             $attribute['password'] = Hash::make($attribute['password']);
         }
 

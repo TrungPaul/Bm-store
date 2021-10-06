@@ -81,8 +81,8 @@
                     <form>
                         <div class="form-group">
                             <input type="hidden" name="id" id="user_id">
-                            <label for="recipient-name" class="col-form-label">Password:</label>
-                            <input type="text" name="password" class="form-control" id="new_pass">
+                            <label for="recipient-name" class="col-form-label required-flag">Password:</label>
+                            <input type="text" name="password" class="form-control" id="new_pass" required>
                             <span id="pass-error"></span>
                         </div>
                     </form>
@@ -115,7 +115,7 @@
             if ($.trim(new_pass) == '')
             {
                 var error = $('#pass-error')
-                    error.text('Khong duoc de trong');
+                    error.text('Không được để trống mật khẩu');
                     error.addClass('help-block has-error');
                 return false;
             }
@@ -136,7 +136,7 @@
                 },
                 error: function (res)
                 {
-                    toastr.error(res);
+                    toastr.error(res.message);
                 }
             })
         }
