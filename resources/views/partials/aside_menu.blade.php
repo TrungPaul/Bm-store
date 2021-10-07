@@ -34,7 +34,7 @@
                             </g>
                         </svg>
                     </span>
-                    <span class="kt-menu__link-text">Buildings</span>
+                    <span class="kt-menu__link-text">Products</span>
                     <i class="kt-menu__ver-arrow la la-angle-right"></i>
                 </a>
                 <div class="kt-menu__submenu ">
@@ -47,7 +47,7 @@
                         </li>
 
                         <li class="kt-menu__item kt-menu__item--active">
-                            <a href="" class="kt-menu__link ">
+                            <a href="{{ route('product.create') }}" class="kt-menu__link ">
                                 <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i>
                                 <span class="kt-menu__link-text">Add new</span>
                             </a>
@@ -103,7 +103,7 @@
                             </g>
                         </svg>
                     </span>
-                    <span class="kt-menu__link-text">Category</span>
+                    <span class="kt-menu__link-text">Categories</span>
                     <i class="kt-menu__ver-arrow la la-angle-right"></i>
                 </a>
                 <div class="kt-menu__submenu">

@@ -40,6 +40,7 @@ Route::group([
 
     Route::resource('/category', 'CategoryController');
     Route::resource('/user', 'UserController');
+    Route::resource('/product', 'ProductController');
     Route::post('/user/{id}/pass-default', 'UserController@passDefault')->name('password.reset.default');
 
 

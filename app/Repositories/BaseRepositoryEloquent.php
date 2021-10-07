@@ -118,9 +118,4 @@ abstract class BaseRepositoryEloquent extends L5BaseRepository
     {
         return $this->model->insert($data);
     }
-
-    public function test()
-    {
-        return "test";
-    }
 }

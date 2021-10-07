@@ -69,8 +69,13 @@ return [
     'updated_success' => 'Updated successfully',
     'error' => 'Some thing wrong!',
     'price' => 'Price',
+    'sell' => 'Sell',
+    'categories' => 'Category',
+    'name_user' => 'Name user',
+    'data' => 'Data',
     'page' => [
         'category' => 'Category',
-        'user' => 'Users'
+        'user' => 'Users',
+        'product' => 'Product',
     ],
 ];
