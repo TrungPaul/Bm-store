@@ -47,11 +47,15 @@
                                     </td>
                                     <td>{{ $user->created_at }}</td>
                                     <td class="text-center">
+                                        {!! Form::open(['route' => ['password.reset.default', $user->id] , 'method' => 'post', 'id' => 'form-reset-pass' ]) !!}
+                                        <a href="javascript:;" onclick="resetPass()" title="Reset pass default:123456" class="btn btn-sm btn-clean btn-icon btn-icon-md">
+                                            <i class="la la-unlock-alt"></i>
+                                        </a>
+                                        {!! Form::close() !!}
                                         <a href="javascript:void(0)" id="edit-user" data-toggle="modal" data-target="#exampleModal" data-id="{{ $user->id }}"
                                            class="btn btn-sm btn-clean btn-icon btn-icon-md">
                                             <i class="la la-edit"></i>
                                         </a>
-
                                     </td>
                                 </tr>
                             @empty
@@ -139,6 +143,11 @@
                     toastr.error(res.message);
                 }
             })
+        }
+
+        function resetPass()
+        {
+            $('#form-reset-pass').submit();
         }
     </script>
 @endsection
