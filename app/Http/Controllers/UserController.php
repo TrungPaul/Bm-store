@@ -26,36 +26,12 @@ class UserController extends Controller
         return view('admin.users.index', compact('users'));
     }
 
-    public function create()
-    {
-        return view('admin.categories.create');
-    }
-
-    /*public function store(CreateCategoryRequest $request)
-    {
-        try {
-            DB::beginTransaction();
-            $this->categoryService->create(
-                $this->categoryService->preparingCreateOrUpdate($request->validated())
-            );
-            DB::commit();
-
-            return redirect()->route('category.index')->with('success', @trans('common.created_success'));
-        } catch (\Exception $exception)
-        {
-            DB::rollBack();
-
-            return redirect()->back()->withInput()->with('error', @trans('common.error') . $exception->getMessage());
-        }
-
-    }*/
-
-    public function edit(int $id)
+    /*public function edit(int $id)
     {
         $user = $this->userService->find($id);
 
         return view('admin.users.edit', compact('user'));
-    }
+    }*/
 
     public function update(Request $request, int $id)
     {
@@ -76,7 +52,7 @@ class UserController extends Controller
                     'message' => @trans('common.updated_success')
                 ]);
             }
-            return redirect()->route('category.index')->with('success', @trans('common.updated_success'));
+            return redirect()->route('user.index')->with('success', @trans('common.updated_success'));
         } catch (\Exception $exception) {
             DB::rollBack();
             if (isset($request->type)) {
@@ -85,6 +61,21 @@ class UserController extends Controller
                     'message' => $exception->getMessage()
                 ]);
             }
+
+            return redirect()->back()->withInput()->with('error', @trans('common.error') . $exception->getMessage());
+        }
+    }
+
+    public function passDefault(Request $request, int $id)
+    {
+        try {
+            DB::beginTransaction();
+            $request['password'] = config('constants.password-default');
+            $this->update($request, $id);
+
+            return redirect()->route('user.index')->with('success', @trans('common.updated_success'));
+        } catch (\Exception $exception) {
+            DB::rollBack();
 
             return redirect()->back()->withInput()->with('error', @trans('common.error') . $exception->getMessage());
         }
