@@ -23,7 +23,7 @@ Route::post('/register', 'App\Http\Controllers\Auth\AuthController@storeRegister
 Route::get('/test', 'App\Http\Controllers\CategoryController@index');
 
 Route::group([
-    'middleware' => ['auth', 'admin'],
+    'middleware' => ['auth'],
     'namespace' => 'App\Http\Controllers',
     'prefix' => 'admin'
 ], function () {
@@ -46,7 +46,9 @@ Route::group([
 
     Route::get('/logout', 'Auth\AuthController@logout')->name('logout');
 });
-
+Route::get('/user', function () {
+    return view('user.index');
+});
 // Forgot password
 Route::get('/forgot-password', function () {
     return view('auth.passwords.email');
