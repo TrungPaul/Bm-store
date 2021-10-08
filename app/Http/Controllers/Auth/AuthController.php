@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Http\Requests\Auth\RegisterRequest;
 use App\Rules\CurrentPasswordCorrectRule;
+use App\Services\UserService;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,13 +17,30 @@ use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
+    /**
+     * @var UserService
+     */
+    private $userService;
+
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
+
     public function login() {
         return view('auth.login');
     }
 
-    public function storeLogin(Request $request) {
-        $credentials = $request->only('email', 'password');
-        if (Auth::attempt($credentials, $request->remember)) {
+    public function storeLogin(Request $request)
+    {
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+
+        $fieldType = filter_var($request->email, FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
+
+        if (Auth::attempt(array($fieldType => $request->email, 'password' => $request->password), $request->remember)) {
             return redirect()->route('admin')->with('success', 'Login successfully');
         }
 
@@ -30,25 +48,23 @@ class AuthController extends Controller
     }
 
     public function register() {
-        return "view register";
+        return view('auth.register');
     }
 
-    public function storeRegister()
+    public function storeRegister(RegisterRequest $request)
     {
         DB::beginTransaction();
         try {
-            User::create([
-                'name' => 'dungvn',
-                'email' => 'dungvn.dev@gmail.com',
-                'password' => Hash::make('123456'),
-            ]);
+            $this->userService->create(
+                $this->userService->preparingCreateOrUpdate($request->validated())
+            );
             DB::commit();
 
             return redirect()->route('login')->with('success', 'Successfully');
         } catch (\Exception $exception) {
             DB::rollBack();
 
-            return redirect()->back()->with('error', 'Some thing wrong!');
+            return redirect()->back()->withInput()->with('error', $exception->getMessage());
         }
     }
 

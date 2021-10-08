@@ -12,7 +12,9 @@
         "laravel/framework": "^8.54",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
-        "paypal/rest-api-sdk-php": "^1.14"
+        "laravelcollective/html": "^6.2",
+        "prettus/l5-repository": "^2.7",
+        "tucker-eric/eloquentfilter": "^3.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

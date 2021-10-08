@@ -34,6 +34,8 @@
 
         <script>
             const baseUrl = "{{ config('app.url') }}"
+            const currentLang = "{{ app()->getLocale() }}"
+            // console.log(currentLang);
         </script>
     </head>
     <!-- end::Head -->

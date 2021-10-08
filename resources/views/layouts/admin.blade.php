@@ -79,7 +79,11 @@
             </div>
             <!-- end:: Aside -->
             <!-- begin:: Aside Menu -->
-            @include('partials.aside_menu')
+            @if(Auth::check() && Auth::user()->type == config('constants.admin'))
+                @include('partials.aside_menu')
+            @else
+                @include('partials.user_menu')
+            @endif
             <!-- end:: Aside Menu -->
         </div>
         <!-- end:: Aside -->
