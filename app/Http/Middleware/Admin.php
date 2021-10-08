@@ -22,6 +22,6 @@ class Admin
             return $next($request);
         }
 
-        return redirect()->route('login')->with('error', 'FORBIDDEN');
+        return abort(403);
     }
 }

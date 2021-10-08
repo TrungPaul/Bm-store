@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
-use App\Models\User;
 use App\Rules\CurrentPasswordCorrectRule;
 use App\Services\UserService;
 use Illuminate\Auth\Events\PasswordReset;
@@ -32,9 +31,16 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    public function storeLogin(Request $request) {
-        $credentials = $request->only('email', 'password');
-        if (Auth::attempt($credentials, $request->remember)) {
+    public function storeLogin(Request $request)
+    {
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+
+        $fieldType = filter_var($request->email, FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
+
+        if (Auth::attempt(array($fieldType => $request->email, 'password' => $request->password), $request->remember)) {
             return redirect()->route('admin')->with('success', 'Login successfully');
         }
 

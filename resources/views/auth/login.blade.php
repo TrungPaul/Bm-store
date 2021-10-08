@@ -7,12 +7,18 @@
     <form action="{{ route('login.store') }}" method="POST" class="kt-form">
         @csrf
         <div class="form-group">
-            <input class="form-control" type="email" placeholder="Enter email" name="email" id="email" value="" required
+            <input class="form-control" type="text" placeholder="Enter email or username" name="email" id="email" value="" required
                 autocomplete="email" autofocus>
+            @error('email')
+            <span class="help-block has-error">{{ $message }}</span>
+            @enderror
         </div>
         <div class="form-group">
             <input class="form-control" type="password" placeholder="Enter password" name="password" id="password"
                 required autocomplete="current-password">
+            @error('password')
+            <span class="help-block has-error">{{ $message }}</span>
+            @enderror
         </div>
         <div class="row kt-login__extra">
             <div class="col">
