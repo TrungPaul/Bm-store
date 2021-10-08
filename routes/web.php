@@ -23,7 +23,7 @@ Route::post('/register', 'App\Http\Controllers\Auth\AuthController@storeRegister
 Route::get('/test', 'App\Http\Controllers\CategoryController@index');
 
 Route::group([
-    'middleware' => 'auth',
+    'middleware' => ['auth', 'admin'],
     'namespace' => 'App\Http\Controllers',
     'prefix' => 'admin'
 ], function () {
