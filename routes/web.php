@@ -52,9 +52,7 @@ Route::post('/create-payment', '\App\Http\Controllers\PaymentController@create')
     ->name('create-payment');
 Route::get('/execute-payment', '\App\Http\Controllers\PaymentController@execute')
     ->name('execute-payment');
-Route::get('cancel', function () {
-    return "Cancel";
-})->name('cancel-payment');
+Route::get('cancel', '\App\Http\Controllers\PaymentController@cancel')->name('cancel-payment');
 
 Route::get('/user', function () {
     return view('user.index');

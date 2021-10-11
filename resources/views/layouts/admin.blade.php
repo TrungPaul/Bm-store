@@ -106,6 +106,11 @@
                     @include('partials.language_bar')
                     <!--end: Language bar -->
                     <!--begin: User Bar -->
+                    <div class="kt-header__topbar-item kt-header__topbar-item--langs payment-money">
+                        <a href="" class="kt-header__topbar-icon">
+                            <span class="badge badge-danger badge-counter" id="xu">{{ Auth::user()->money ?? 0 }}</span>
+                        </a>
+                    </div>
                     @include('partials.user_bar')
                     <!--end: User Bar -->
                 </div>
