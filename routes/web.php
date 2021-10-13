@@ -59,3 +59,8 @@ Route::get('/reset-password/{token}', function ($token) {
     return view('auth.passwords.reset', ['token' => $token]);
 })->name('password.reset');
 Route::post('/reset-password', 'App\Http\Controllers\Auth\AuthController@resetPassword')->name('password.update');
+
+Route::post('/create-payment', 'App\Http\Controllers\PayPalController@create')->name('paypal.create');
+Route::get('/execute-payment', 'App\Http\Controllers\PayPalController@execute')->name('paypal.execute');
+Route::get('/cancel-payment', 'App\Http\Controllers\PayPalController@cancel')->name('paypal.cancel');
+Route::get('/order', 'App\Http\Controllers\PayPalController@getAll');
