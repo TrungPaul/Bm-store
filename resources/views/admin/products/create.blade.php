@@ -30,7 +30,7 @@
                     <div class="kt-portlet__body">
                         <!--begin::Form-->
                         <div class="row">
-                            <div class="col-md-6 col-sm-12">
+                            <div class="col-md-12 col-sm-12">
                                 <div class="form-group">
                                     @component('components.select_input',
                                         [
@@ -43,30 +43,21 @@
                                     ]) @endcomponent
                                 </div>
                             </div>
-                            <div class="col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    @component('components.number_input',[
-                                            'name' => 'sell',
-                                            'label' => @trans('common.sell'),
-                                            'attributes' => [
-                                                'required' => true,
-                                            ]
-                                    ]) @endcomponent
-                                </div>
-                            </div>
+                        <!-- title
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     @component('components.text_input',
                                         [
                                             'name' => 'name_user',
-                                            'label' => @trans('common.name_user'),
+                                            'label' => @trans('common.title'),
                                             'attributes' => [
                                                 'required' => true,
                                             ]
                                     ]) @endcomponent
                                 </div>
                             </div>
-                            <div class="col-md-6 col-sm-12">
+                            -->
+                            <div class="col-md-12 col-sm-12">
                                 <div class="form-group">
                                     @component('components.textarea_input',
                                         [
@@ -78,7 +69,7 @@
                                                 'placeholder' => 'fb_id/password/email/email_pass'
                                             ]
                                     ]) @endcomponent
-                                    <span>Tài khoản cách nhau 1 </span>
+                                    <span>Tài khoản cách nhau 1 dòng</span>
                                 </div>
                             </div>
 

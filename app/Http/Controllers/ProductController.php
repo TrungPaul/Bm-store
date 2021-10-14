@@ -2,21 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Product\CreateProductRequest;
 use App\Models\Category;
-use App\Models\Product;
-use App\Services\CategoryService;
 use App\Services\ProductService;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
     private $productService;
-    private $categoryService;
 
-    public function __construct(ProductService $productService, CategoryService $categoryService)
+    public function __construct(ProductService $productService)
     {
-        $this->categoryService = $categoryService;
         $this->productService = $productService;
     }
 
@@ -26,7 +22,7 @@ class ProductController extends Controller
         return view('admin.products.create', compact('categories'));
     }
 
-    public function store(Request $request)
+    public function store(CreateProductRequest $request)
     {
         try {
             DB::beginTransaction();
