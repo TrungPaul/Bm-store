@@ -13,14 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 Route::get('/login', 'App\Http\Controllers\Auth\AuthController@login')->name('login');
 Route::post('/login', 'App\Http\Controllers\Auth\AuthController@storeLogin')->name('login.store');
 Route::get('/register', 'App\Http\Controllers\Auth\AuthController@register');
 Route::post('/register', 'App\Http\Controllers\Auth\AuthController@storeRegister')->name('register.store');
 Route::get('/test', 'App\Http\Controllers\CategoryController@index');
+
+Route::group([
+    'middleware' => ['auth'],
+    'namespace' => 'App\Http\Controllers',
+], function () {
+    Route::get('/', 'BuyerController@index')->name('buyer.index');
+});
+
 
 Route::group([
     'middleware' => ['auth'],

@@ -46,4 +46,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function isUser() :bool
+    {
+        return $this->type == config('constants.user');
+    }
+
+    public function isAdmin() :bool
+    {
+        return $this->type == config('constants.admin');
+    }
 }
