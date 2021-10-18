@@ -24,6 +24,7 @@ Route::group([
     'namespace' => 'App\Http\Controllers',
 ], function () {
     Route::get('/', 'BuyerController@index')->name('buyer.index');
+    Route::get('/deposit', 'OrderController@index')->name('deposit.index');
 });
 
 

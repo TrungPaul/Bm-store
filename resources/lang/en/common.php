@@ -74,9 +74,11 @@ return [
     'name_user' => 'Name user',
     'data' => 'Data',
     'buy' => 'Buy',
+    'paypal_id' => 'Transfer id',
     'page' => [
         'category' => 'Category',
         'user' => 'Users',
         'product' => 'Product',
+        'order' => 'Order'
     ],
 ];
