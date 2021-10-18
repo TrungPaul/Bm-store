@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
+    const STATUS_CREATED = 1;
+    const STATUS_VERIFIED = 2;
+    const STATUS_WEBHOOK = 3;
+    const STATUS_CANCEL = 4;
+
     use HasFactory;
 
     protected $table = 'orders';

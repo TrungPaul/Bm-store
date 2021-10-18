@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Services\CategoryService;
+use App\Services\OrderService;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -27,6 +28,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(\App\Repositories\PostRepository::class, \App\Repositories\PostRepositoryEloquent::class);
         $this->app->bind(\App\Repositories\CategoryRepository::class, \App\Repositories\CategoryRepositoryEloquent::class);
         $this->app->singleton(CategoryService::class, CategoryService::class);
+        $this->app->singleton(OrderService::class, OrderService::class);
         //:end-bindings:
     }
 }
