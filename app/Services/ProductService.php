@@ -13,6 +13,7 @@ class ProductService extends BaseService
 
     public function preparingCreate(array $attributes)
     {
+        $attributes['name_user'] = now();
         $data = $attributes['data'];
         // cut data line by line
         $products = explode("\n", $data);

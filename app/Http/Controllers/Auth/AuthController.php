@@ -41,6 +41,8 @@ class AuthController extends Controller
         $fieldType = filter_var($request->email, FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
 
         if (Auth::attempt(array($fieldType => $request->email, 'password' => $request->password), $request->remember)) {
+            if (Auth::user()->isUser())
+                return redirect()->route('buyer.index')->with('success', 'Login successfully');
             return redirect()->route('admin')->with('success', 'Login successfully');
         }
 

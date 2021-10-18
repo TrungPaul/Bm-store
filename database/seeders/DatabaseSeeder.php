@@ -22,13 +22,25 @@ class DatabaseSeeder extends Seeder
 
     private function makeAdmin()
     {
-        User::create([
-            'name' => 'dungvn',
-            'email' => 'dungvn.dev@gmail.com',
-            'phone' => '1234567890',
-            'password' => Hash::make('123456'),
-            'type' => 1, //admin
-            'status' => 1 //active
-        ]);
+        User::create(
+            [
+                [
+                    'name' => 'dungvn',
+                    'email' => 'dungvn.dev@gmail.com',
+                    'phone' => '1234567890',
+                    'password' => Hash::make('123456'),
+                    'type' => 1, //admin
+                    'status' => 1 //active
+                ],
+                [
+                    'name' => 'user',
+                    'email' => 'user@gmail.com',
+                    'phone' => '1234567890',
+                    'password' => Hash::make('123456'),
+                    'type' => 2, //admin
+                    'status' => 1 //active
+                ]
+            ]
+        );
     }
 }

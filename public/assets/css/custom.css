@@ -66,3 +66,14 @@ td ul.action-control li {
 .row > .form-group {
     margin-bottom: 1rem
 }
+
+.card-body.d-flex.flex-center.flex-column.pt-12.p-9 {
+    padding-top: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.col-md-3.col-xxl-4
+{
+    padding: 2%;
+}

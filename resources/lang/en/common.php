@@ -73,6 +73,7 @@ return [
     'categories' => 'Category',
     'name_user' => 'Name user',
     'data' => 'Data',
+    'buy' => 'Buy',
     'page' => [
         'category' => 'Category',
         'user' => 'Users',
