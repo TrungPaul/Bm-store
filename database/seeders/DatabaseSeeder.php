@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -22,7 +23,7 @@ class DatabaseSeeder extends Seeder
 
     private function makeAdmin()
     {
-        User::create(
+        User::insert(
             [
                 [
                     'name' => 'dungvn',
@@ -42,5 +43,14 @@ class DatabaseSeeder extends Seeder
                 ]
             ]
         );
+
+        Category::insert([
+            ['name' => 'Cate 1.2', 'price' =>  100, 'description' => 'cate', 'type' => 1, 'status' => 1],
+            ['name' => 'Cate 2.2', 'price' =>  200, 'description' => 'cate', 'type' => 2, 'status' => 1],
+            ['name' => 'Cate 3.2', 'price' =>  500, 'description' => 'cate', 'type' => 3, 'status' => 1],
+            ['name' => 'Cate 1.1', 'price' =>  100, 'description' => 'cate', 'type' => 1, 'status' => 1],
+            ['name' => 'Cate 2.1', 'price' =>  200, 'description' => 'cate', 'type' => 2, 'status' => 1],
+            ['name' => 'Cate 3.1', 'price' =>  500, 'description' => 'cate', 'type' => 3, 'status' => 1],
+        ]);
     }
 }

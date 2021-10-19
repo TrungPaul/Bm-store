@@ -68,6 +68,9 @@
                     @endphp
                     <ul class="kt-menu__subnav">
                         @foreach($categories as $category)
+                            @if ($category->products->count() == 0)
+                                @break
+                            @endif
                             <li class="kt-menu__item kt-menu__item--active">
                                 <a href="{{ route('product.create') }}" class="kt-menu__link ">
                                     <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i>

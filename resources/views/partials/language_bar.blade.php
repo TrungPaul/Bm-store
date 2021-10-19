@@ -1,3 +1,10 @@
+@if (Auth::user()->isUser())
+    <div class="kt-header__topbar-item kt-header__topbar-item--langs payment-money">
+        <a href="#" class="kt-header__topbar-icon">
+            <span class="badge badge-danger badge-counter" id="xu">{{ Auth::user()->balance ?? 0 }} xu</span>
+        </a>
+    </div>
+@endif
 <div class="kt-header__topbar-item kt-header__topbar-item--langs">
     <div class="kt-header__topbar-wrapper" data-toggle="dropdown" data-offset="10px,0px">
         <span class="kt-header__topbar-icon">
