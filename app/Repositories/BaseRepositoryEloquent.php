@@ -104,6 +104,7 @@ abstract class BaseRepositoryEloquent extends L5BaseRepository
 
     public function filter(array $filters, ?string $modelFilter)
     {
+        //dd($filters, $modelFilter);
         $this->applyCriteria();
         $this->applyScope();
 

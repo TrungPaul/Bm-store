@@ -25,6 +25,8 @@ Route::group([
 ], function () {
     Route::get('/', 'BuyerController@index')->name('buyer.index');
     Route::get('/deposit', 'OrderController@index')->name('deposit.index');
+    Route::post('/bought', 'BuyerController@buyProduct')->name('buyer.purchase');
+    Route::get('/bought', 'BuyerController@bought')->name('buyer.bought');
 });
 
 
