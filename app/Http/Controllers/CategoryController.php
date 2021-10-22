@@ -22,6 +22,7 @@ class CategoryController extends Controller
     public function index(Request $request)
     {
         $requestData = $request->all();
+        dd($requestData);
         $categories = $this->categoryService->getAllWithFilter($requestData);
 
         return view('admin.categories.index', compact('categories'));

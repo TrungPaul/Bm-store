@@ -2,7 +2,9 @@
 
 namespace App\Repositories;
 
+use App\ModelFilters\ProductFilter;
 use App\Models\Product;
+use Illuminate\Container\Container as Application;
 use Prettus\Repository\Criteria\RequestCriteria;
 
 
@@ -13,6 +15,11 @@ use Prettus\Repository\Criteria\RequestCriteria;
  */
 class ProductRepositoryEloquent extends BaseRepositoryEloquent implements ProductRepository
 {
+    public function __construct(Application $app)
+    {
+        parent::__construct($app);
+        $this->setModelFilter(ProductFilter::class);
+    }
     /**
      * Specify Model class name
      *

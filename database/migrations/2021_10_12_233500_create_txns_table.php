@@ -16,8 +16,8 @@ class CreateTxnsTable extends Migration
         Schema::create('txns', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('order_id');
-            $table->unsignedBigInteger('ipn_id');
+            $table->unsignedBigInteger('order_id')->nullable();
+            $table->unsignedBigInteger('ipn_id')->nullable();
             $table->decimal('amount', 12,2)->nullable(); // nạp
             $table->decimal('open_balance', 12,2)->nullable(); // tiền hiện có
             $table->decimal('close_balance', 12,2)->nullable(); // tiền sau khi nạp

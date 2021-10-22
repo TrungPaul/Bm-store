@@ -15,47 +15,52 @@
             <div class="row g-6 g-xl-9">
                 <!--begin::Col-->
                 @foreach($categories->where('type', \App\Models\Category::TAB_BM) as $category)
-                    <div class="col-md-3 col-xxl-4">
-                    <!--begin::Card-->
-                    <div class="card">
-                        <!--begin::Card body-->
-                        <div class="card-body d-flex flex-center flex-column pt-12 p-9">
-                            <!--begin::Avatar-->
-                            <div class="symbol symbol-65px symbol-circle mb-5">
-                                <img src="assets/media/flags/226-united-states.svg" alt="image" width="50">
-                                <div class="bg-success position-absolute border border-4 border-white h-15px w-15px rounded-circle translate-middle start-100 top-100 ms-n3 mt-n3"></div>
-                            </div>
-                            <!--end::Avatar-->
-                            <!--begin::Name-->
-                            <a href="#" class="fs-4 text-gray-800 text-hover-primary fw-bolder mb-0">Karina Clark</a>
+                    @php
+                        $available = $category->products->where('status', \App\Models\Product::STATUS_ACTIVE)->count();
+                    @endphp
+                    <div class="col-md-3 col-xxl-4" id="cate-{{$category->id}}">
+                        <!--begin::Card-->
+                        <div class="card">
+                            <!--begin::Card body-->
+                            <div class="card-body d-flex flex-center flex-column pt-12 p-9">
+                                <!--begin::Avatar-->
+                                <div class="symbol symbol-65px symbol-circle mb-5">
+                                    <img src="assets/media/flags/226-united-states.svg" alt="image" width="50">
+                                    <div class="bg-success position-absolute border border-4 border-white h-15px w-15px rounded-circle translate-middle start-100 top-100 ms-n3 mt-n3"></div>
+                                </div>
+                                <!--end::Avatar-->
+                                <!--begin::Name-->
+                            {{--                            <a href="#" class="fs-4 text-gray-800 text-hover-primary fw-bolder mb-0">Karina Clark</a>--}}
                             <!--end::Name-->
-                            <!--begin::Position-->
-                            <div class="fw-bold text-gray-400 mb-6">{{ $category->name }}</div>
-                            <!--end::Position-->
-                            <!--begin::Info-->
-                            <div class="d-flex flex-center flex-wrap">
-                                <!--begin::Stats-->
-                                <div class="border border-gray-300 border-dashed rounded min-w-80px py-3 px-4 mb-3">
-                                    <div class="fs-6 fw-bolder text-gray-700">{{ $category->price }}</div>
-                                    <div class="fw-bold text-gray-400">USDT</div>
+                                <!--begin::Position-->
+                                <div class="fw-bold text-gray-400 mb-6" id="nameCate">{{ $category->name }}</div>
+                                <!--end::Position-->
+                                <!--begin::Info-->
+                                <div class="d-flex flex-center flex-wrap">
+                                    <!--begin::Stats-->
+                                    <div class="border border-gray-300 border-dashed rounded min-w-80px py-3 px-4 mx-2 mb-3">
+                                        <div class="fs-6 fw-bolder text-gray-700" id="price">{{ $category->price }}</div>
+                                        <div class="fw-bold text-gray-400">USDT</div>
+                                    </div>
+                                    <!--end::Stats-->
+                                    <!--begin::Stats-->
+                                    <div class="border border-gray-300 border-dashed rounded min-w-80px py-3 px-4 mx-2 mb-3">
+                                        <div class="fs-6 fw-bolder text-gray-700" id="available">{{ $available }}</div>
+                                        <div class="fw-bold text-gray-400">Total</div>
+                                    </div>
+                                    <!--end::Stats-->
+                                    <!--begin::Stats-->
+                                    <button id="buy" data-toggle="modal" @if($available > 0) data-target="#exampleModalSizeSm" @endif data-id="{{ $category->id }}" cateId="{{ $category->id }}" class="btn {{ $available == 0 ? "btn-dark" : "btn-primary" }}">
+                                        {{ $available == 0 ? "Het hang" : "Mua hang" }}
+                                    </button>
+                                    <!--end::Stats-->
                                 </div>
-                                <!--end::Stats-->
-                                <!--begin::Stats-->
-                                <div class="border border-gray-300 border-dashed rounded min-w-80px py-3 px-4 mx-2 mb-3">
-                                    <div class="fs-6 fw-bolder text-gray-700">{{ $category->products->count() }}</div>
-                                    <div class="fw-bold text-gray-400">Total</div>
-                                </div>
-                                <!--end::Stats-->
-                                <!--begin::Stats-->
-                                <button data-toggle="modal" data-target="#exampleModalSizeSm" data-id="{{ $category->id }}" class="btn {{ $category->products->count() == 0 ? "btn-dark" : "btn-primary" }}">{{ $category->products->count() == 0 ? "Het hang" : "Mua hang" }}</button>
-                                <!--end::Stats-->
+                                <!--end::Info-->
                             </div>
-                            <!--end::Info-->
+                            <!--end::Card body-->
                         </div>
-                        <!--end::Card body-->
+                        <!--end::Card-->
                     </div>
-                    <!--end::Card-->
-                </div>
                 @endforeach
             </div>
             <!--end::Row-->
@@ -75,47 +80,52 @@
             <div class="row g-6 g-xl-9">
                 <!--begin::Col-->
                 @foreach($categories->where('type', \App\Models\Category::TAB_VIA) as $category)
-                    <div class="col-md-3 col-xxl-4">
-                    <!--begin::Card-->
-                    <div class="card">
-                        <!--begin::Card body-->
-                        <div class="card-body d-flex flex-center flex-column pt-12 p-9">
-                            <!--begin::Avatar-->
-                            <div class="symbol symbol-65px symbol-circle mb-5">
-                                <img src="assets/media/flags/226-united-states.svg" alt="image" width="50">
-                                <div class="bg-success position-absolute border border-4 border-white h-15px w-15px rounded-circle translate-middle start-100 top-100 ms-n3 mt-n3"></div>
-                            </div>
-                            <!--end::Avatar-->
-                            <!--begin::Name-->
-{{--                            <a href="#" class="fs-4 text-gray-800 text-hover-primary fw-bolder mb-0">Karina Clark</a>--}}
+                    @php
+                        $available = $category->products->where('status', \App\Models\Product::STATUS_ACTIVE)->count();
+                    @endphp
+                    <div class="col-md-3 col-xxl-4" id="cate-{{$category->id}}">
+                        <!--begin::Card-->
+                        <div class="card">
+                            <!--begin::Card body-->
+                            <div class="card-body d-flex flex-center flex-column pt-12 p-9">
+                                <!--begin::Avatar-->
+                                <div class="symbol symbol-65px symbol-circle mb-5">
+                                    <img src="assets/media/flags/226-united-states.svg" alt="image" width="50">
+                                    <div class="bg-success position-absolute border border-4 border-white h-15px w-15px rounded-circle translate-middle start-100 top-100 ms-n3 mt-n3"></div>
+                                </div>
+                                <!--end::Avatar-->
+                                <!--begin::Name-->
+                            {{--                            <a href="#" class="fs-4 text-gray-800 text-hover-primary fw-bolder mb-0">Karina Clark</a>--}}
                             <!--end::Name-->
-                            <!--begin::Position-->
-                            <div class="fw-bold text-gray-400 mb-6">{{ $category->name }}</div>
-                            <!--end::Position-->
-                            <!--begin::Info-->
-                            <div class="d-flex flex-center flex-wrap">
-                                <!--begin::Stats-->
-                                <div class="border border-gray-300 border-dashed rounded min-w-80px py-3 px-4 mx-2 mb-3">
-                                    <div class="fs-6 fw-bolder text-gray-700">{{ $category->price }}</div>
-                                    <div class="fw-bold text-gray-400">USDT</div>
+                                <!--begin::Position-->
+                                <div class="fw-bold text-gray-400 mb-6" id="nameCate">{{ $category->name }}</div>
+                                <!--end::Position-->
+                                <!--begin::Info-->
+                                <div class="d-flex flex-center flex-wrap">
+                                    <!--begin::Stats-->
+                                    <div class="border border-gray-300 border-dashed rounded min-w-80px py-3 px-4 mx-2 mb-3">
+                                        <div class="fs-6 fw-bolder text-gray-700" id="price">{{ $category->price }}</div>
+                                        <div class="fw-bold text-gray-400">USDT</div>
+                                    </div>
+                                    <!--end::Stats-->
+                                    <!--begin::Stats-->
+                                    <div class="border border-gray-300 border-dashed rounded min-w-80px py-3 px-4 mx-2 mb-3">
+                                        <div class="fs-6 fw-bolder text-gray-700" id="available">{{ $available }}</div>
+                                        <div class="fw-bold text-gray-400">Total</div>
+                                    </div>
+                                    <!--end::Stats-->
+                                    <!--begin::Stats-->
+                                    <button id="buy" data-toggle="modal" @if($available > 0) data-target="#exampleModalSizeSm" @endif data-id="{{ $category->id }}" cateId="{{ $category->id }}" class="btn {{ $available == 0 ? "btn-dark" : "btn-primary" }}">
+                                        {{ $available == 0 ? "Het hang" : "Mua hang" }}
+                                    </button>
+                                    <!--end::Stats-->
                                 </div>
-                                <!--end::Stats-->
-                                <!--begin::Stats-->
-                                <div class="border border-gray-300 border-dashed rounded min-w-80px py-3 px-4 mx-2 mb-3">
-                                    <div class="fs-6 fw-bolder text-gray-700">{{ $category->products->count() }}</div>
-                                    <div class="fw-bold text-gray-400">Total</div>
-                                </div>
-                                <!--end::Stats-->
-                                <!--begin::Stats-->
-                                <button class="btn {{ $category->products->count() == 0 ? "btn-dark" : "btn-primary" }}">{{ $category->products->count() == 0 ? "Het hang" : "Mua hang" }}</button>
-                                <!--end::Stats-->
+                                <!--end::Info-->
                             </div>
-                            <!--end::Info-->
+                            <!--end::Card body-->
                         </div>
-                        <!--end::Card body-->
+                        <!--end::Card-->
                     </div>
-                    <!--end::Card-->
-                </div>
                 @endforeach
             </div>
             <!--end::Row-->
@@ -135,6 +145,9 @@
             <div class="row g-6 g-xl-9">
                 <!--begin::Col-->
                 @foreach($categories->where('type', \App\Models\Category::TAB_CLONE) as $category)
+                    @php
+                        $available = $category->products->where('status', \App\Models\Product::STATUS_ACTIVE)->count();
+                    @endphp
                     <div class="col-md-3 col-xxl-4" id="cate-{{$category->id}}">
                     <!--begin::Card-->
                     <div class="card">
@@ -162,12 +175,14 @@
                                 <!--end::Stats-->
                                 <!--begin::Stats-->
                                 <div class="border border-gray-300 border-dashed rounded min-w-80px py-3 px-4 mx-2 mb-3">
-                                    <div class="fs-6 fw-bolder text-gray-700" id="available">{{ $category->products->count() }}</div>
+                                    <div class="fs-6 fw-bolder text-gray-700" id="available">{{ $available }}</div>
                                     <div class="fw-bold text-gray-400">Total</div>
                                 </div>
                                 <!--end::Stats-->
                                 <!--begin::Stats-->
-                                <button id="buy" data-toggle="modal" data-target="#exampleModalSizeSm" data-id="{{ $category->id }}" cateId="{{ $category->id }}" class="btn {{ $category->products->count() == 0 ? "btn-dark" : "btn-primary" }}">{{ $category->products->count() == 0 ? "Het hang" : "Mua hang" }}</button>
+                                <button id="buy" data-toggle="modal" @if($available > 0) data-target="#exampleModalSizeSm" @endif data-id="{{ $category->id }}" cateId="{{ $category->id }}" class="btn {{ $available == 0 ? "btn-dark" : "btn-primary" }}">
+                                    {{ $available == 0 ? "Het hang" : "Mua hang" }}
+                                </button>
                                 <!--end::Stats-->
                             </div>
                             <!--end::Info-->
@@ -194,13 +209,13 @@
                 <div class="modal-body">
                     <h5>Nhập số lượng muốn mua:</h5>
                     <input type="number" class="form-control" id="buyNumber" name="buy_number"><br>
+                    <span id="pass-error" class="help-block has-error"></span>
                     <h5 id="totalMoney">Tổng tiền:12</h5>
                 </div>
 
-
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary font-weight-bold">Save changes</button>
+                    <button type="submit" id="bought_bm" onclick="handleBought()" class="btn btn-primary font-weight-bold" >Mua</button>
                 </div>
             </div>
         </div>
@@ -230,18 +245,54 @@
                 $('#totalMoney').text("Tổng tiền: " +cate.money);
             });
 
-            function getInfoCate(id, sl=1) {
-                var title = $('#exampleModalLabel').text($('#cate-'+id).find('#nameCate').text())
-                var available = $('#cate-'+id).find('#available').text();
-                var price = $('#cate-'+id).find('#price').text();
-                return {
-                    id: id,
-                    title: title,
-                    sl: available,
-                    price: price,
-                    money: sl*price
-                }
-            }
+
         });
+
+        function getInfoCate(id, sl=1) {
+            var title = $('#exampleModalLabel').text($('#cate-'+id).find('#nameCate').text())
+            var available = $('#cate-'+id).find('#available').text();
+            var price = $('#cate-'+id).find('#price').text();
+            return {
+                id: id,
+                title: title,
+                sl: available,
+                price: price,
+                money: sl*price
+            }
+        }
+
+        function handleBought() {
+            var quantity = $('#buyNumber').val();
+            var cateId = $('#exampleModalSizeSm').attr('cate-id');
+            var cate= getInfoCate(cateId, quantity);
+            //var available = $('#cate-'+cateId).find('#available').text();
+
+            if (quantity <= 0 || quantity > cate.sl) {
+                $('#pass-error').text('Số lượng mua không hợp lệ');
+                return false;
+            } else {
+                $.ajax({
+                    type: 'POST',
+                    url: `{!! route('buyer.purchase') !!}`,
+                    data: {
+                        category_id: cateId,
+                        per_page: quantity,
+                    },
+                    success: function (data) {
+                        if(data.code != 200) {
+                            return toastr.error(data.message);
+                        }
+
+                        $('#exampleModalSizeSm').modal('toggle');
+                        toastr.success(data.message);
+                        setTimeout(function () {
+                            window.location.href = `{!! route('buyer.bought') !!}`
+                        }, 1000)
+                    }, error: function (res) {
+                        toastr.error(res.message);
+                    }
+                })
+            }
+        }
     </script>
 @endsection

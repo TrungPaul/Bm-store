@@ -29,6 +29,7 @@ return [
         'type' => [
             'manually' => 1,
             'webhook' => 2,
+            'payment' => 3
         ]
     ]
 ];
