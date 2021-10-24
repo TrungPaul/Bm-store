@@ -23,4 +23,9 @@ class ProductFilter extends ModelFilter
     {
         return $this->where('status', $status);
     }
+
+    public function idUserBuy($id)
+    {
+        return $this->where('id_user_buy', $id);
+    }
 }

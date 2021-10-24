@@ -24,4 +24,9 @@ class Product extends Model
         'date',
         'date_sell'
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
 }
