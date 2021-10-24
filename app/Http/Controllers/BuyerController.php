@@ -7,6 +7,8 @@ use App\Models\Product;
 use App\Models\Txn;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -34,7 +36,7 @@ class BuyerController extends Controller
         $request['status'] = Product::STATUS_ACTIVE;
         $requestData = $request->all();
         $products = $this->productService->getAllWithFilter($requestData, [], 'ASC', 'id', true);
-        $price = Category::find(6)->price;
+        $price = Category::find($request->category_id)->price;
         $totalMoney = $price*$request->per_page;
 
         if ((int) $totalMoney > (int)Auth::user()->balance) {
@@ -80,9 +82,43 @@ class BuyerController extends Controller
         }
     }
 
-    public function bought()
+    public function bought(Request $request)
     {
-        //@Todo: redirect page history buy
-        return redirect()->route('buyer.index');
+        $request['status'] = Product::STATUS_BOUGHT;
+        $request['id_user_buy'] = Auth::id();
+        $requestData = $request->all();
+        $products = $this->productService->getAllWithFilter($requestData, [], 'DESC', 'updated_at', false);
+        $products = $this->paginateHistoryBought($products->groupBy('category_id'));
+
+        return view('user.history_bought.index', compact('products'));
+    }
+
+    public function paginateHistoryBought($items, $perPage = 2, $page = null)
+    {
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, ['path' => route('buyer.bought'), 'pageName' => 'page']);
+    }
+
+    public function download(Request $request, int $id)
+    {
+        $request['status'] = Product::STATUS_BOUGHT;
+        $request['id_user_buy'] = Auth::id();
+        $request['category_id'] = $id;
+        $requestData = $request->all();
+        $products = $this->productService->getAllWithFilter($requestData, [], 'ASC', 'updated_at', true);
+
+        $content = "";
+        foreach ($products->items() as $product) {
+            $content.= $product->data;
+            $content .= "\n";
+        }
+
+        $fileName = time();
+        return response($content)
+            ->withHeaders([
+                'Content-Type' => 'text/plain',
+                'Cache-Control' => 'no-store, no-cache',
+                'Content-Disposition' => 'attachment; filename=' . $fileName . '.txt',
+            ]);
     }
 }

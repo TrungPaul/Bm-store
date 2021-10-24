@@ -75,6 +75,7 @@ return [
     'data' => 'Data',
     'buy' => 'Buy',
     'paypal_id' => 'Transfer id',
+    'quantity' => 'Quantity',
     'page' => [
         'category' => 'Category',
         'user' => 'Users',
