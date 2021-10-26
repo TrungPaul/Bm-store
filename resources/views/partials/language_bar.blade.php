@@ -1,7 +1,7 @@
 @if (Auth::user()->isUser())
     <div class="kt-header__topbar-item kt-header__topbar-item--langs payment-money">
         <a href="#" class="kt-header__topbar-icon">
-            <span class="badge badge-danger badge-counter" id="xu">{{ Auth::user()->balance ?? 0 }} xu</span>
+            <span class="badge badge-danger badge-counter" id="xu">{{ number_format(Auth::user()->balance ?? 0, 0,'.', '.').' đ' }}</span>
         </a>
     </div>
 @endif

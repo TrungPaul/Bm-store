@@ -27,6 +27,11 @@ class BuyerController extends Controller
         return view('user.index', compact('categories'));
     }
 
+    public function deposit()
+    {
+        return view('user.deposit.create');
+    }
+
     public function buyProduct(Request $request)
     {
         $request->validate([
@@ -93,7 +98,7 @@ class BuyerController extends Controller
         return view('user.history_bought.index', compact('products'));
     }
 
-    public function paginateHistoryBought($items, $perPage = 2, $page = null)
+    public function paginateHistoryBought($items, $perPage = 15, $page = null)
     {
         $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
         return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, ['path' => route('buyer.bought'), 'pageName' => 'page']);

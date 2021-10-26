@@ -27,6 +27,9 @@ class PayPalController extends Controller
 
     public function create(Request $request)
     {
+        $request->validate([
+            'money' => 'required|numeric|integer|gte:1',
+        ]);
         $money = $request->money;
         // Setup make order to paypal v2
         $client = new PayPalHttpClient(self::environment());
@@ -75,14 +78,11 @@ class PayPalController extends Controller
 
     public function execute(Request $request)
     {
-        /*["token"   => "00456692SD357724R",
-           "PayerID" => "RK4QVDHS84JYY"]*/
         Log::info("param execute:".json_encode($request->all()));
         $orderId = request('token');
         // verify order has payment.
         $order = Order::where('paypal_id', $orderId)->first();
-        if ($order == null || $order->status != 1)
-        {
+        if ($order == null || $order->status != 1) {
             return "Don hang khong ton tai";
         }
 
@@ -98,7 +98,7 @@ class PayPalController extends Controller
             // If call returns body in response, you can get the deserialized version from the result attribute of the response
             Log::info("result execute payment:".json_encode($response));;
 
-            return  redirect()->route('admin')->with('success', 'Wait a minutes');
+            return  redirect()->route('buyer.deposit')->with('success', 'Giao dịch đang được xử lý');
         }catch (\Exception $ex) {
             echo $ex->getCode();
             print_r($ex->getMessage());
@@ -154,7 +154,7 @@ class PayPalController extends Controller
                 'user_id' => $order->user_id,
                 'order_id' => $order->id,
                 'ipn_id' => $ipn->id,
-                'amount' => $order->amount,
+                'amount' => $order->amount*24000,
                 'type' => config('constants.txn.type.webhook'),
                 'status' => Txn::STAT_COMPLETED,
             ]);

@@ -169,7 +169,7 @@
                             <div class="d-flex flex-center flex-wrap">
                                 <!--begin::Stats-->
                                 <div class="border border-gray-300 border-dashed rounded min-w-80px py-3 px-4 mx-2 mb-3">
-                                    <div class="fs-6 fw-bolder text-gray-700" id="price">{{ $category->price }}</div>
+                                    <div class="fs-6 fw-bolder text-gray-700" id="price" >{{ number_format($category->price, 0,'.', '.').' đ' }}</div>
                                     <div class="fw-bold text-gray-400">USDT</div>
                                 </div>
                                 <!--end::Stats-->
@@ -210,7 +210,7 @@
                     <h5>Nhập số lượng muốn mua:</h5>
                     <input type="number" class="form-control" id="buyNumber" name="buy_number"><br>
                     <span id="pass-error" class="help-block has-error"></span>
-                    <h5 id="totalMoney">Tổng tiền:12</h5>
+                    <h5 id="totalMoney">Tổng tiền:500000</h5>
                 </div>
 
                 <div class="modal-footer">
@@ -235,14 +235,14 @@
                 $('#exampleModalSizeSm').attr('cate-id',cateId);
                 var cate = getInfoCate(cateId);
                 $('#buyNumber').val(cate.sl);
-                $('#totalMoney').text("Tổng tiền: " +cate.sl*cate.price);
+                $('#totalMoney').text("Tổng tiền: " + cate.sl*cate.price + '.000 đ');
             });
 
             $('input[name=buy_number]').change(function() {
                 var input = $(this).val();
                 var cateId = $('#exampleModalSizeSm').attr('cate-id');
                 var cate = getInfoCate(cateId,input);
-                $('#totalMoney').text("Tổng tiền: " +cate.money);
+                $('#totalMoney').text("Tổng tiền: " + cate.money + '.000 đ');
             });
 
 
@@ -251,7 +251,7 @@
         function getInfoCate(id, sl=1) {
             var title = $('#exampleModalLabel').text($('#cate-'+id).find('#nameCate').text())
             var available = $('#cate-'+id).find('#available').text();
-            var price = $('#cate-'+id).find('#price').text();
+            var price = $('#cate-'+id).find('#price').text().replace(' đ', '');
             return {
                 id: id,
                 title: title,
@@ -265,7 +265,6 @@
             var quantity = $('#buyNumber').val();
             var cateId = $('#exampleModalSizeSm').attr('cate-id');
             var cate= getInfoCate(cateId, quantity);
-            //var available = $('#cate-'+cateId).find('#available').text();
 
             if (quantity <= 0 || quantity > cate.sl) {
                 $('#pass-error').text('Số lượng mua không hợp lệ');
