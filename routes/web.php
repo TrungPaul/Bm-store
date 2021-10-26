@@ -24,10 +24,15 @@ Route::group([
     'namespace' => 'App\Http\Controllers',
 ], function () {
     Route::get('/', 'BuyerController@index')->name('buyer.index');
-    Route::get('/deposit', 'OrderController@index')->name('deposit.index');
+    Route::get('/history-deposit', 'OrderController@index')->name('deposit.index');
     Route::post('/bought', 'BuyerController@buyProduct')->name('buyer.purchase');
     Route::get('/history-bought', 'BuyerController@bought')->name('buyer.bought');
     Route::get('/download/{id}/', 'BuyerController@download')->name('buyer.download_bough');
+
+    Route::get('/deposit', 'BuyerController@deposit')->name('buyer.deposit');
+    Route::post('/create-payment', 'PayPalController@create')->name('paypal.create');
+    Route::get('/execute-payment', 'PayPalController@execute')->name('paypal.execute');
+    Route::get('/cancel-payment', 'PayPalController@cancel')->name('paypal.cancel');
 });
 
 
@@ -69,7 +74,5 @@ Route::get('/reset-password/{token}', function ($token) {
 })->name('password.reset');
 Route::post('/reset-password', 'App\Http\Controllers\Auth\AuthController@resetPassword')->name('password.update');
 
-Route::post('/create-payment', 'App\Http\Controllers\PayPalController@create')->name('paypal.create');
-Route::get('/execute-payment', 'App\Http\Controllers\PayPalController@execute')->name('paypal.execute');
-Route::get('/cancel-payment', 'App\Http\Controllers\PayPalController@cancel')->name('paypal.cancel');
+
 Route::get('/order', 'App\Http\Controllers\PayPalController@getAll');
